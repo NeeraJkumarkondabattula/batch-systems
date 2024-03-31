@@ -3,6 +3,7 @@ import { add } from "@/Redux/Cartslice";
 import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Image from "next/image";
 
 const Homepage = () => {
   const [products, setproducts] = useState([]);
@@ -24,7 +25,7 @@ const Homepage = () => {
 
   return (
     <Container>
-      {products.map((product) => (
+      {products.map((product, index) => (
         <div key={product.id} className="card">
           <img src={product.image} alt="img" />
           <h4>{product.title}</h4>
@@ -41,11 +42,12 @@ const Homepage = () => {
 const Container = styled.div`
   padding: 20px;
   width: 100vw;
-  height: 100vh;
+  height: auto;
   font-family: "Poppins";
   font-size: 16px;
   font-weight: 400;
   background-color: white;
+  color: darkslateblue;
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(4, 1fr);

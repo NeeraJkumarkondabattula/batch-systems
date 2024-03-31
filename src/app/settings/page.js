@@ -54,6 +54,7 @@ const Container = styled.div`
   height: 100vh;
   padding: 20px;
   background-color: white;
+  color: darkslateblue;
   box-sizing: border-box;
   form {
     padding: 20px;

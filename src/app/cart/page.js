@@ -15,8 +15,11 @@ const Cart = () => {
   return (
     <Container>
       <h3>Cart page</h3>
-      {cartitems.map((item) => (
-        <div className="card">
+      {cartitems.length < 1 && (
+        <h2 style={{ textAlign: "center" }}>cart is empty</h2>
+      )}
+      {cartitems.map((item, index) => (
+        <div className="card" key={index}>
           <img src={item.image} alt="img" />
           <h5>{item.title}</h5>
           <h5>{item.price}</h5>
@@ -32,9 +35,11 @@ const Cart = () => {
 const Container = styled.div`
   padding: 20px;
   width: 100vw;
+  height: 100vh;
   font-family: "Poppins";
   font-size: 16px;
   font-weight: 400;
+  color: darkslateblue;
   background-color: white;
   display: grid;
   gap: 2rem;

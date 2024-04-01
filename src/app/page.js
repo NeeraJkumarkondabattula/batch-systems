@@ -3,15 +3,18 @@ import { add } from "@/Redux/Cartslice";
 import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const Homepage = () => {
   const [products, setproducts] = useState([]);
+  const [carousel, setCarousel] = useState([]);
   const dispatch = useDispatch();
 
   const getproducts = async () => {
     const res = await fetch("https://fakestoreapi.com/products");
     const data = await res.json();
+    setCarousel(data.slice(0, 5));
     setproducts(data);
   };
 
@@ -23,19 +26,76 @@ const Homepage = () => {
     getproducts();
   }, []);
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
-    <Container>
-      {products.map((product, index) => (
-        <div key={product.id} className="card">
-          <img src={product.image} alt="img" />
-          <h4>{product.title}</h4>
-          <h5>{product.price}</h5>
-          <button className="btn" onClick={() => handleadd(product)}>
-            Add to cart
-          </button>
-        </div>
-      ))}
-    </Container>
+    <div>
+      <Carousel responsive={responsive}>
+        {products.map((product, index) => (
+          <div
+            key={product.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              backgroundColor: "white",
+              height: "300px",
+            }}>
+            <img
+              src={product.image}
+              alt="img"
+              width={200}
+              height={200}
+              style={{ aspectRatio: "1 / 1 " }}
+            />
+            <h4>{product.title}</h4>
+            <h5>{product.price}</h5>
+            <button
+              style={{
+                width: "60%",
+                padding: "8px 20px",
+                backgroundColor: "darkslateblue",
+                color: "white",
+              }}
+              onClick={() => handleadd(product)}>
+              Add to cart
+            </button>
+          </div>
+        ))}
+      </Carousel>
+
+      <Container>
+        {products.map((product, index) => (
+          <div key={product.id} className="card">
+            <img src={product.image} alt="img" />
+            <h4>{product.title}</h4>
+            <h5>{product.price}</h5>
+            <button className="btn" onClick={() => handleadd(product)}>
+              Add to cart
+            </button>
+          </div>
+        ))}
+      </Container>
+    </div>
   );
 };
 

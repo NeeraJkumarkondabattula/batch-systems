@@ -1,6 +1,6 @@
 "use client";
 import { add } from "@/Redux/Cartslice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
@@ -9,6 +9,8 @@ import "react-multi-carousel/lib/styles.css";
 const Homepage = () => {
   const [products, setproducts] = useState([]);
   const [carousel, setCarousel] = useState([]);
+  const { productCard } = useSelector((state) => state.setting[0]);
+  console.log(productCard);
   const dispatch = useDispatch();
 
   const getproducts = async () => {
@@ -84,16 +86,30 @@ const Homepage = () => {
       </Carousel>
 
       <Container>
-        {products.map((product, index) => (
-          <div key={product.id} className="card">
-            <img src={product.image} alt="img" />
-            <h4>{product.title}</h4>
-            <h5>{product.price}</h5>
-            <button className="btn" onClick={() => handleadd(product)}>
-              Add to cart
-            </button>
-          </div>
-        ))}
+        {productCard == "ProductCard1"
+          ? products.map((product, index) => (
+              <div key={product.id} className="card">
+                <img src={product.image} alt="img" />
+                <h4>{product.title}</h4>
+                <h5>{product.price}</h5>
+                <button className="btn" onClick={() => handleadd(product)}>
+                  Add to cart
+                </button>
+              </div>
+            ))
+          : products.map((product, index) => (
+              <div
+                key={product.id}
+                className="card"
+                style={{ backgroundColor: "black" }}>
+                <img src={product.image} alt="img" />
+                <h4>{product.title}</h4>
+                <h5>{product.price}</h5>
+                <button className="btn" onClick={() => handleadd(product)}>
+                  Add to cart
+                </button>
+              </div>
+            ))}
       </Container>
     </div>
   );

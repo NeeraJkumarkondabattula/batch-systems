@@ -4,8 +4,8 @@ const settingSlice = createSlice({
   name: "Setting",
   initialState: [
     {
-      navbar: "Navbar1",
-      productCard: "productCard1",
+      navbar: "NavBar1",
+      productCard: "ProductCard1",
       view: "viewAll",
     },
   ],
@@ -13,8 +13,11 @@ const settingSlice = createSlice({
     chnageNavbar(state, action) {
       state[0].navbar = action.payload;
     },
+    changeProductCard(state, action) {
+      state[0].productCard = action.payload;
+    },
   },
 });
 
-export const { chnageNavbar } = settingSlice.actions;
+export const { chnageNavbar, changeProductCard } = settingSlice.actions;
 export default settingSlice.reducer;

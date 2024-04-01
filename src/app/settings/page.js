@@ -1,16 +1,20 @@
 "use client";
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import { chnageNavbar } from "@/Redux/Settingslice";
-import { redirect } from "next/navigation";
+import { chnageNavbar, changeProductCard } from "@/Redux/Settingslice";
+import { redirect, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 const Settings = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(chnageNavbar(document.querySelector("#navBarVariant").value));
-    redirect("/");
+    dispatch(
+      changeProductCard(document.querySelector("#productCardVariant").value)
+    );
+    router.push("/");
   };
 
   return (

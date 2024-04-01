@@ -7,67 +7,130 @@ import styled from "styled-components";
 
 const NavBar1 = () => {
   const cartitems = useSelector((state) => state.cart);
-  const setting = useSelector((state) => state.setting[0]);
-  console.log(setting);
+  const { navbar } = useSelector((state) => state.setting[0]);
+  console.log(navbar);
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <Container>
-      <div className="nav-logo">
-        <Link
-          href="/"
-          onClick={() => {
-            setOpenMenu(!openMenu);
-            document.querySelector(".nav-menu-open").style.left = "-1024px";
-          }}>
-          BatchSystems
-        </Link>
-      </div>
-      <div
-        className="nav-menu-icon"
-        onClick={() => {
-          setOpenMenu(!openMenu);
-          openMenu
-            ? (document.querySelector(".nav-menu-open").style.left = "0")
-            : (document.querySelector(".nav-menu-open").style.left = "-1024px");
-        }}>
-        <IoMdMenu />
-      </div>
-      <div className="nav-menu-open">
-        <Link
-          href="/settings"
-          className="nav-settings"
-          onClick={() => {
-            setOpenMenu(!openMenu);
-            document.querySelector(".nav-menu-open").style.left = "-1024px";
-          }}>
-          Settings
-        </Link>
-        <br />
-        <Link
-          href="/cart"
-          className="nav-cart"
-          onClick={() => {
-            setOpenMenu(!openMenu);
-            document.querySelector(".nav-menu-open").style.left = "-1024px";
-          }}>
-          Cart <span>{cartitems.length}</span>
-        </Link>
-      </div>
-      <div className="nav-menu">
-        <div className="nav-settings">
-          <Link href="/settings" onClick={() => setOpenMenu(!openMenu)}>
-            Settings
-          </Link>
-        </div>
-        <div className="nav-cart">
-          {" "}
-          <Link href="/cart">
-            Cart <span>{cartitems.length}</span>
-          </Link>
-        </div>
-      </div>
-    </Container>
+    <>
+      {navbar == "NavBar2" ? (
+        <Container style={{ backgroundColor: "black" }}>
+          <div className="nav-logo">
+            <Link
+              href="/"
+              onClick={() => {
+                setOpenMenu(!openMenu);
+                document.querySelector(".nav-menu-open").style.left = "-1024px";
+              }}>
+              BatchSystems
+            </Link>
+          </div>
+          <div
+            className="nav-menu-icon"
+            onClick={() => {
+              setOpenMenu(!openMenu);
+              openMenu
+                ? (document.querySelector(".nav-menu-open").style.left = "0")
+                : (document.querySelector(".nav-menu-open").style.left =
+                    "-1024px");
+            }}>
+            <IoMdMenu />
+          </div>
+          <div className="nav-menu-open">
+            <Link
+              href="/settings"
+              className="nav-settings"
+              onClick={() => {
+                setOpenMenu(!openMenu);
+                document.querySelector(".nav-menu-open").style.left = "-1024px";
+              }}>
+              Settings
+            </Link>
+            <br />
+            <Link
+              href="/cart"
+              className="nav-cart"
+              onClick={() => {
+                setOpenMenu(!openMenu);
+                document.querySelector(".nav-menu-open").style.left = "-1024px";
+              }}>
+              Cart <span>{cartitems.length}</span>
+            </Link>
+          </div>
+          <div className="nav-menu">
+            <div className="nav-settings">
+              <Link href="/settings" onClick={() => setOpenMenu(!openMenu)}>
+                Settings
+              </Link>
+            </div>
+            <div className="nav-cart">
+              {" "}
+              <Link href="/cart">
+                Cart <span>{cartitems.length}</span>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      ) : (
+        <Container>
+          <div className="nav-logo">
+            <Link
+              href="/"
+              onClick={() => {
+                setOpenMenu(!openMenu);
+                document.querySelector(".nav-menu-open").style.left = "-1024px";
+              }}>
+              BatchSystems
+            </Link>
+          </div>
+          <div
+            className="nav-menu-icon"
+            onClick={() => {
+              setOpenMenu(!openMenu);
+              openMenu
+                ? (document.querySelector(".nav-menu-open").style.left = "0")
+                : (document.querySelector(".nav-menu-open").style.left =
+                    "-1024px");
+            }}>
+            <IoMdMenu />
+          </div>
+          <div className="nav-menu-open">
+            <Link
+              href="/settings"
+              className="nav-settings"
+              onClick={() => {
+                setOpenMenu(!openMenu);
+                document.querySelector(".nav-menu-open").style.left = "-1024px";
+              }}>
+              Settings
+            </Link>
+            <br />
+            <Link
+              href="/cart"
+              className="nav-cart"
+              onClick={() => {
+                setOpenMenu(!openMenu);
+                document.querySelector(".nav-menu-open").style.left = "-1024px";
+              }}>
+              Cart <span>{cartitems.length}</span>
+            </Link>
+          </div>
+          <div className="nav-menu">
+            <div className="nav-settings">
+              <Link href="/settings" onClick={() => setOpenMenu(!openMenu)}>
+                Settings
+              </Link>
+            </div>
+            <div className="nav-cart">
+              {" "}
+              <Link href="/cart">
+                Cart <span>{cartitems.length}</span>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      )}
+    </>
   );
 };
 

@@ -7,6 +7,8 @@ import styled from "styled-components";
 
 const NavBar1 = () => {
   const cartitems = useSelector((state) => state.cart);
+  const setting = useSelector((state) => state.setting[0]);
+  console.log(setting);
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -85,6 +87,7 @@ const Container = styled.div`
     position: absolute;
     left: -1024px;
     top: 60px;
+    z-index: 11;
     height: 100vh;
     background-color: white;
     color: darkslateblue;

@@ -1,28 +1,22 @@
 "use client";
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import { chnageNavbar } from "@/Redux/Settingslice";
+import { redirect } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const Settings = () => {
-  const [settings, setSettings] = useState({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const settingsData = await getSettings();
-      setSettings(settingsData);
-    };
-
-    fetchData();
-  }, []);
-
-  const handleSaveSettings = async () => {
-    await updateSettings(settings);
-    // Optionally show a success message or redirect to another page
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(chnageNavbar(document.querySelector("#navBarVariant").value));
+    redirect("/");
   };
 
   return (
     <Container>
       <h1>Settings</h1>
-      <form id="catalogSettingsForm">
+      <form id="catalogSettingsForm" onSubmit={handleSubmit}>
         <h2>Catalog Settings</h2>
         <label for="navBarVariant">Navigation Bar Variant:</label>
         <select id="navBarVariant">
@@ -41,9 +35,7 @@ const Settings = () => {
           <option value="carousel">Carousel</option>
         </select>
 
-        <button type="button" onclick="applySettings()">
-          Apply Settings
-        </button>
+        <button type="submit">Apply Settings</button>
       </form>
     </Container>
   );
